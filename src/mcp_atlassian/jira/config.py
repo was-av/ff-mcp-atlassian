@@ -74,7 +74,9 @@ class JiraConfig:
                 )
                 raise ValueError(error_msg)
         else:  # Server/Data Center
-            if personal_token:
+            if os.getenv("JIRA_AUTH_TYPE"):
+                auth_type = os.getenv("JIRA_AUTH_TYPE")
+            elif personal_token:
                 auth_type = "token"
             elif username and api_token:
                 # Allow basic auth for Server/DC too
